@@ -1,0 +1,23 @@
+{
+  "name": "github",
+  "version": "0.0.0",
+  "author": "Daiwei Lu <daiweilu123@gmail.com> (http://daiwei.lu/)",
+  "license": "MIT",
+  "main": "src/index.js",
+  "dependencies": {
+    "bluebird": "3.4.1",
+    "co": "4.6.0",
+    "octonode": "0.7.6",
+    "request-promise": "3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "2.13.1",
+    "eslint-plugin-node": "1.5.0",
+    "onchange": "2.5.0"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "watch:lint": "npm run lint -s; onchange -v 'src/**/*.js' -- npm run lint -s",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
