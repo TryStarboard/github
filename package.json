@@ -18,6 +18,8 @@
   "scripts": {
     "lint": "eslint src",
     "watch:lint": "npm run lint -s; onchange -v 'src/**/*.js' -- npm run lint -s",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
   }
 }
