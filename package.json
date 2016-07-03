@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "eslint": "3.0.0",
-    "eslint-plugin-node": "1.5.2",
+    "eslint-plugin-node": "2.0.0",
     "greenkeeper-postpublish": "^1.0.0",
     "onchange": "2.5.0"
   },
