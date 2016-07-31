@@ -8,7 +8,7 @@
     "bluebird": "3.4.1",
     "co": "4.6.0",
     "octonode": "0.7.6",
-    "request-promise": "4.0.2"
+    "request-promise": "4.1.0"
   },
   "devDependencies": {
     "eslint": "3.0.1",
