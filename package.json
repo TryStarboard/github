@@ -4,6 +4,9 @@
   "author": "Daiwei Lu <daiweilu123@gmail.com> (http://daiwei.lu/)",
   "license": "MIT",
   "main": "src/index.js",
+  "engines": {
+    "node": "6.3.1"
+  },
   "dependencies": {
     "bluebird": "3.4.1",
     "co": "4.6.0",
@@ -11,8 +14,8 @@
     "request-promise": "3.0.0"
   },
   "devDependencies": {
-    "eslint": "2.13.1",
-    "eslint-plugin-node": "1.5.1",
+    "eslint": "3.3.0",
+    "eslint-config-d6u": "1.2.1",
     "greenkeeper-postpublish": "^1.0.0",
     "onchange": "2.5.0"
   },

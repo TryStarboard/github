@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-const {stringify} = require('querystring');
-const {promisifyAll} = require('bluebird');
-const {wrap} = require('co');
-const github = require('octonode');
-const rp = require('request-promise');
+const {stringify} = require('querystring')
+const {promisifyAll} = require('bluebird')
+const {wrap} = require('co')
+const github = require('octonode')
+const rp = require('request-promise')
 
-promisifyAll(Object.getPrototypeOf(github.client()), {multiArgs: true});
+promisifyAll(Object.getPrototypeOf(github.client()), {multiArgs: true})
 
 /**
  * @param  {Object} opts
@@ -18,20 +18,20 @@ promisifyAll(Object.getPrototypeOf(github.client()), {multiArgs: true});
 function createClient(opts) {
   github.auth.config({
     id: opts.clientId,
-    secret: opts.clientSecret,
-  });
+    secret: opts.clientSecret
+  })
 
   function createLoginUrl() {
     const queryStr = stringify({
       client_id: opts.clientId,
       redirect_uri: opts.redirectUri,
-      state: Date.now(),
-    });
-    return `https://github.com/login/oauth/authorize?${queryStr}`;
+      state: Date.now()
+    })
+    return `https://github.com/login/oauth/authorize?${queryStr}`
   }
 
   const handleLoginCallback = wrap(function *({code, state}) {
-    const {access_token} = yield rp({
+    const {access_token: accessToken} = yield rp({
       method: 'POST',
       uri: 'https://github.com/login/oauth/access_token',
       body: {
@@ -39,13 +39,13 @@ function createClient(opts) {
         client_secret: opts.clientSecret,
         redirect_uri: opts.redirectUri,
         code,
-        state,
+        state
       },
-      json: true,
-    });
+      json: true
+    })
 
-    return access_token;
-  });
+    return accessToken
+  })
 
   // { login: 'd6u',
   //   id: 1234,
@@ -78,20 +78,20 @@ function createClient(opts) {
   //   created_at: '2012-08-14T22:42:49Z',
   //   updated_at: '2016-02-20T03:02:44Z' }
 
-  const fetchUserProfile = wrap(function *(access_token) {
-    const client = github.client(access_token);
-    const [, profile] = yield client.getAsync('/user');
-    return profile;
-  });
+  const fetchUserProfile = wrap(function *(accessToken) {
+    const client = github.client(accessToken)
+    const [, profile] = yield client.getAsync('/user')
+    return profile
+  })
 
   return {
     client: github,
     createLoginUrl,
     handleLoginCallback,
-    fetchUserProfile,
-  };
+    fetchUserProfile
+  }
 }
 
 module.exports = {
-  createClient,
-};
+  createClient
+}
